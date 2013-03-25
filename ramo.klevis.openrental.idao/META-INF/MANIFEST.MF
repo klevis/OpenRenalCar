@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Idao
+Bundle-SymbolicName: ramo.klevis.openrental.idao
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: ramo.klevis.openrental.database;bundle-version="1.0.0"
+Export-Package: ramo.klevis.national.ibuisnesslogic

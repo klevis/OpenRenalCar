@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="NationalRentCar" transaction-type="RESOURCE_LOCAL">
+		<class>ramo.klevis.openrental.entity.Location</class>
+		<class>ramo.klevis.openrental.entity.Class</class>
+		<class>ramo.klevis.openrental.entity.Car</class>
+		<class>ramo.klevis.openrental.entity.Customer</class>
+		<class>ramo.klevis.openrental.entity.Rental</class>
+		<class>ramo.klevis.openrental.entity.User</class>
+		<class>ramo.klevis.openrental.entity.Role</class>
+		<class>ramo.klevis.openrental.entity.Dokumentacioni</class>
+		<class>ramo.klevis.openrental.entity.Agent</class>
+		<class>ramo.klevis.openrental.entity.Investime</class>
+		<properties>
+			<property name="eclipselink.jdbc.batch-writing" value="JDBC"/>
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/national_al_1"/>
+			<property name="javax.persistence.jdbc.user" value="root"/>
+			<property name="javax.persistence.jdbc.password" value="kl"/>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+		</properties>
+	</persistence-unit>
+</persistence>
+ 

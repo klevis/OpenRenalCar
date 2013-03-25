@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project ramo.klevis.openrental.database">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="C:/Users/euronics/Desktop/plugins/database2.jar" filesetmanifest="mergewithoutmain">
+            <manifest>
+                <attribute name="Main-Class" value="ramo.klevis.openrental.entity.Prov"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Bundle-ManifestVersion" value="2"/>
+                <attribute name="Bundle-Name" value="Database"/>
+                <attribute name="Bundle-SymbolicName" value="ramo.klevis.openrental.database2222"/>
+		<attribute name="Require-Bundle" value="ramo.klevis.openrental.utils;bundle-version=1.0.0,javax.persistence;bundle-version=2.0.3, com.mysql.jdbc;bundle-version=5.1.17"/>
+		<attribute name="Import-Package" value="org.eclipse.swt.widgets, org.osgi.framework;version=1.7.0"/>
+		<attribute name="Export-Package" value="ramo.klevis.openrental.entity"/>
+
+
+            </manifest>
+            <fileset dir="D:/VaadinWindowBuilder/ramo.klevis.openrental.database/build/classes"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/euronics/Dropbox/per Dormire/pe4_lib/javax.persistence_2.0.3.v201010191057.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Users/euronics/Dropbox/per Dormire/pe4_lib/eclipselink.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.e4.ui.model.workbench_0.10.1.v20120523-1955.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.emf.ecore_2.8.1.v20120911-0500.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.emf.common_2.8.0.v20120911-0500.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.emf.ecore.xmi_2.8.0.v20120911-0500.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/pluginopenrental/javax.persistence_2.0.3.v201010191057.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.core.databinding_1.4.1.v20120912-132807.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.core.runtime_3.9.0.v20121004-163638.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.equinox.common_3.6.100.v20120522-1841.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.equinox.registry_3.5.300.v20120731-134527.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.core.runtime.compatibility.registry_3.5.100.v20120912-175931/runtime_registry_compatibility.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.jface_3.8.200.v20121026-224752.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.swt_3.101.0.v4312.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.swt.win32.win32.x86_64_3.101.0.v4312.jar"/>
+            <fileset dir="D:/VaadinWindowBuilder/ramo.klevis.openrental.utils/bin"/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/pluginopenrental/mysql-connector-java-5.1.17-bin.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:/eclipse-juno/plugins/org.eclipse.osgi_3.9.0.v20121026-132713.jar"/>
+        </jar>
+    </target>
+</project>
