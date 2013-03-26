@@ -41,6 +41,7 @@ import ramo.klevis.openrental.entity.Car;
 import ramo.klevis.openrental.entity.Class;
 import ramo.klevis.openrental.entity.Location;
 import ramo.klevis.openrental.iservice.IFreeCarsConsumer;
+import org.eclipse.wb.swt.ResourceManager;
 
 public class FormAvaibleCar extends Composite {
 
@@ -124,7 +125,7 @@ public class FormAvaibleCar extends Composite {
 	public FormAvaibleCar(final Composite parent, int style) {
 
 		super(parent, SWT.CLOSE | SWT.APPLICATION_MODAL);
-		this.setSize(300, 300);
+		this.setSize(422, 369);
 		setLayout(null);
 
 		Label lblNgaData = new Label(this, SWT.NONE);
@@ -150,8 +151,7 @@ public class FormAvaibleCar extends Composite {
 		selectClazz.setBounds(65, 64, 208, 23);
 
 		buttonFreeCar = new Button(this, SWT.NONE);
-		buttonFreeCar.setImage(SWTResourceManager.getImage(
-				FormAvaibleCar.class, "/image/Car Search.png"));
+		buttonFreeCar.setImage(ResourceManager.getPluginImage("ramo.klevis.openrental", "icons/Car Search.png"));
 		buttonFreeCar.setFont(SWTResourceManager.getFont("Segoe UI", 10,
 				SWT.BOLD | SWT.ITALIC));
 		buttonFreeCar.setBounds(278, 64, 208, 48);
@@ -265,8 +265,7 @@ public class FormAvaibleCar extends Composite {
 		tblclmnKlassi.setText("Klassi");
 
 		Button btnNewButton = new Button(this, SWT.NONE);
-		btnNewButton.setImage(SWTResourceManager.getImage(FormAvaibleCar.class,
-				"/image/Sign-Select-icon.png"));
+		btnNewButton.setImage(ResourceManager.getPluginImage("ramo.klevis.openrental", "icons/Symbol_OK.png"));
 		btnNewButton.addSelectionListener(new SelectionAdapter() {
 
 			@Override

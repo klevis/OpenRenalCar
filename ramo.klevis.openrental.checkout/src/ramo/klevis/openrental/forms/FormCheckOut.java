@@ -64,6 +64,7 @@ import ramo.klevis.openrental.entity.Rental;
 import ramo.klevis.openrental.utils.CarImageHolder;
 import ramo.klevis.openrental.utils.Money;
 import ramo.klevis.openrental.utils.RentalStatus;
+import org.eclipse.wb.swt.ResourceManager;
 
 public class FormCheckOut extends Composite {
 	private DataBindingContext m_bindingContext;
@@ -707,8 +708,7 @@ public class FormCheckOut extends Composite {
 
 	public void setBtnNewButton(Button btnNewButton) {
 		this.btnNewButton = btnNewButton;
-		btnNewButton.setImage(SWTResourceManager.getImage(FormCheckOut.class,
-				"/image/rentcar.png"));
+		btnNewButton.setImage(ResourceManager.getPluginImage("ramo.klevis.openrental", "icons/rentcar.png"));
 	}
 
 	public Button getBtnNewButton() {
