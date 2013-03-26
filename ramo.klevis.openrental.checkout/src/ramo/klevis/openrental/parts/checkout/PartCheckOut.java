@@ -38,7 +38,7 @@ public class PartCheckOut {
 	EPartService partService;	
 	@Inject
 	@Optional
-	public void showCheckOutInfo(@EventTopic(value = "CarSelected") Car car
+	public void showCSelectedCar(@EventTopic(value = "CarSelected") Car car
 
 	, MTrimmedWindow mTrimmedWindow) {
 		
