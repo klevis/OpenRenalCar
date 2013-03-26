@@ -16,6 +16,7 @@ public class ClassDao implements IClassDao {
 		List resultList = createEntityManager.createQuery(
 				"Select c from Class c").getResultList();
 
+		System.out.println("rezult   "+resultList.size());
 		return resultList;
 
 	}

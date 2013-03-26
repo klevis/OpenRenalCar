@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="ramo.klevis.openrental.checkout">
-   <implementation class="ramo.klevis.openrental.parts.checkout.FormCheckOut"/>
-   <reference bind="setAgentDao" cardinality="1..1" interface="ramo.klevis.national.ibuisnesslogic.IAgentDao" name="IAgentDao" policy="dynamic"/>
-</scr:component>

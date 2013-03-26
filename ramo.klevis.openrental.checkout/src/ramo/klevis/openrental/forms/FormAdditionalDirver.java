@@ -1,4 +1,4 @@
-package ramo.klevis.openrental.parts.checkout;
+package ramo.klevis.openrental.forms;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.PojoObservables;

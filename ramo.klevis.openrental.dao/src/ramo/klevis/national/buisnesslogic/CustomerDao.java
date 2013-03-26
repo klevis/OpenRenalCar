@@ -51,7 +51,7 @@ public class CustomerDao implements ICustomerDao {
 
 		if (personSearch.getName() != null) {
 			if (personSearch.getName().isEmpty() == false) {
-				sql = sql + " c.pafirstname like:v1";
+				sql = sql + " c.pafirstname like :v1";
 				name = true;
 			}
 		}
@@ -62,7 +62,7 @@ public class CustomerDao implements ICustomerDao {
 				if (name == true) {
 					sql = sql + " and ";
 				}
-				sql = sql + " c.palastname like:v2";
+				sql = sql + " c.palastname like :v2";
 				surname = true;
 			}
 		}
@@ -80,6 +80,15 @@ public class CustomerDao implements ICustomerDao {
 
 			List resultList = createQuery.getResultList();
 
+			
+			
+			System.out.println("Size "+resultList.size());
+			
+			for (Object object : resultList) {
+				
+				System.out.println("object  "+object);
+				
+			}
 			return resultList;
 		} else {
 			return null;

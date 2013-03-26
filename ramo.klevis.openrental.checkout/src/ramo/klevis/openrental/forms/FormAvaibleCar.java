@@ -1,4 +1,4 @@
-package ramo.klevis.openrental.parts.checkout;
+package ramo.klevis.openrental.forms;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +12,7 @@ import org.eclipse.core.databinding.beans.PojoObservables;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableMapLabelProvider;
@@ -27,6 +28,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -35,15 +37,12 @@ import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.wb.swt.SWTResourceManager;
 
-import ramo.klevis.national.ibuisnesslogic.IClassDao;
-import ramo.klevis.national.ibuisnesslogic.IFreeCars;
-import ramo.klevis.national.ibuisnesslogic.ILocationDao;
 import ramo.klevis.openrental.entity.Car;
 import ramo.klevis.openrental.entity.Class;
 import ramo.klevis.openrental.entity.Location;
+import ramo.klevis.openrental.iservice.IFreeCarsConsumer;
 
-
-public class FormAvaibleCar extends Shell {
+public class FormAvaibleCar extends Composite {
 
 	private DataBindingContext m_bindingContext;
 	public static ramo.klevis.national.beans.BeanAvaibleCar beanAvaibleCar = new ramo.klevis.national.beans.BeanAvaibleCar();
@@ -62,10 +61,8 @@ public class FormAvaibleCar extends Shell {
 	private ComboViewer comboViewer;
 	private Combo selectLocation;
 	private ComboViewer comboViewer_1;
-	ILocationDao locationDao ;
-	IClassDao classDao ;
+
 	private Button buttonFreeCar;
-	IFreeCars freedao ;
 	private Table table;
 	private TableViewer tableViewer;
 	private TableColumn tblclmnId;
@@ -91,25 +88,43 @@ public class FormAvaibleCar extends Shell {
 	/**
 	 * @wbp.parser.constructor
 	 */
-	public FormAvaibleCar(Shell parent, int style,
-			ramo.klevis.national.beans.BeanAvaibleCar newBeanAvaibleCar) {
-		this(parent, style);
-		setText("Zgjidh Makinen");
-		setSize(650, 367);
+	// public FormAvaibleCar(Shell parent, int style,
+	// ramo.klevis.national.beans.BeanAvaibleCar newBeanAvaibleCar) {
+	// this(parent, style, classDao);
+	// setText("Zgjidh Makinen");
+	// setSize(650, 367);
+	//
+	// setBeanAvaibleCar(newBeanAvaibleCar);
+	// itemLocation = locationDao.getAllLocation();
+	//
+	// }
 
-		setBeanAvaibleCar(newBeanAvaibleCar);
-		itemLocation = locationDao.getAllLocation();
+	IEventBroker eventBroker;
+
+	public void setEventBroker(IEventBroker eventBroker) {
+		this.eventBroker = eventBroker;
+	}
+
+	private IFreeCarsConsumer freeCarsConsumer;
+
+	public void setFreeCarConsumer(IFreeCarsConsumer freeCarsConsumer) {
+
+		this.freeCarsConsumer = freeCarsConsumer;
 
 	}
 
-	public FormAvaibleCar(final Shell parent, int style) {
+	public void fillFileds() {
+		itemLocation = freeCarsConsumer.getLocationDao().getAllLocation();
+		itemClass = freeCarsConsumer.getClassDao().getAllClasses();
+
+		fillClassAndLocation();
+
+	}
+
+	public FormAvaibleCar(final Composite parent, int style) {
 
 		super(parent, SWT.CLOSE | SWT.APPLICATION_MODAL);
-		setText("Zgjidh Makinen");
-		this.shell = parent;
-		// itemLocation = locationDao.getAllLocation();
-		itemClass = classDao.getAllClasses();
-		System.out.println(itemLocation);
+		this.setSize(300, 300);
 		setLayout(null);
 
 		Label lblNgaData = new Label(this, SWT.NONE);
@@ -144,24 +159,6 @@ public class FormAvaibleCar extends Shell {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				// if (beanAvaibleCar.getFromDate() == null) {
-				// Date date = new Date();
-				//
-				// beanAvaibleCar.setFromDate(date);
-				// fromDateText.setData(date);
-				// }
-				// if (beanAvaibleCar.getToDate() == null) {
-				// Date date = new Date();
-				// UtilDate utilDate = new UtilDate(beanAvaibleCar
-				// .getFromDate(), date);
-				//
-				// beanAvaibleCar.setToDate(utilDate.getSecondDate());
-				// toTime.setTime(beanAvaibleCar.getToDate().getHours(),
-				// beanAvaibleCar.getToDate().getMinutes(),
-				// beanAvaibleCar.getToDate().getSeconds());
-				//
-				// }
-
 				int hours = toTime.getHours();
 				int minutes = toTime.getMinutes();
 				int seconds = toTime.getSeconds();
@@ -188,10 +185,10 @@ public class FormAvaibleCar extends Shell {
 				long diffDays = diff / (24 * 60 * 60 * 1000);
 
 				String s = "" + diffDays;
-				System.out.println("  .... " + diffDays);
 
 				getListCarsAvaible().clear();
-				setListCarsAvaible(freedao.searchForFreeCars(beanAvaibleCar));
+				setListCarsAvaible(freeCarsConsumer.getFreedao()
+						.searchForFreeCars(beanAvaibleCar));
 
 				WritableList writableList_2 = new WritableList(
 						getListCarsAvaible(), Car.class);
@@ -277,7 +274,7 @@ public class FormAvaibleCar extends Shell {
 
 				ISelection selection = tableViewer.getSelection();
 
-				System.out.println("Selection " + selection);
+				
 
 				Car elementAt = (Car) tableViewer.getElementAt(table
 						.getSelectionIndex());
@@ -285,13 +282,17 @@ public class FormAvaibleCar extends Shell {
 				if (selection.isEmpty() == false) {
 
 					elementAt.setNrditeve(spinnerNrDay.getSelection());
-					setFormCheckOut(new FormCheckOut(shell, 0, (Car) elementAt));
+					// setFormCheckOut(new FormCheckOut(shell, 0, (Car)
+					// elementAt,null));
 
-					getFormCheckOut().setBounds(10, 80, 700, 610);
+//					getFormCheckOut().setBounds(10, 80, 700, 610);
 
-					shell.layout();
+//					shell.layout();
 
-					FormAvaibleCar.this.close();
+					boolean send = eventBroker.send("CarSelected", elementAt);
+					System.err.println("Send or not "+send);
+					
+					// FormAvaibleCar.this.close();
 
 				} else {
 					NotifierDialog.notify("Njoftim",
@@ -407,29 +408,7 @@ public class FormAvaibleCar extends Shell {
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
-		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
-		comboViewer.setContentProvider(listContentProvider);
-		//
-		IObservableMap observeMap = PojoObservables.observeMap(
-				listContentProvider.getKnownElements(), Class.class, "class_");
-		comboViewer
-				.setLabelProvider(new ObservableMapLabelProvider(observeMap));
-		//
-		WritableList writableList = new WritableList(itemClass, Class.class);
-		comboViewer.setInput(writableList);
-		//
-		ObservableListContentProvider listContentProvider_1 = new ObservableListContentProvider();
-		comboViewer_1.setContentProvider(listContentProvider_1);
-		//
-		IObservableMap observeMap_1 = PojoObservables
-				.observeMap(listContentProvider_1.getKnownElements(),
-						Location.class, "loc");
-		comboViewer_1.setLabelProvider(new ObservableMapLabelProvider(
-				observeMap_1));
-		//
-		WritableList writableList_1 = new WritableList(itemLocation,
-				Location.class);
-		comboViewer_1.setInput(writableList_1);
+		fillClassAndLocation();
 		//
 		IObservableValue comboViewerObserveSingleSelection = ViewersObservables
 				.observeSingleSelection(comboViewer);
@@ -474,5 +453,31 @@ public class FormAvaibleCar extends Shell {
 		tableViewer.setInput(writableList_2);
 		//
 		return bindingContext;
+	}
+
+	private void fillClassAndLocation() {
+		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
+		comboViewer.setContentProvider(listContentProvider);
+		//
+		IObservableMap observeMap = PojoObservables.observeMap(
+				listContentProvider.getKnownElements(), Class.class, "class_");
+		comboViewer
+				.setLabelProvider(new ObservableMapLabelProvider(observeMap));
+		//
+		WritableList writableList = new WritableList(itemClass, Class.class);
+		comboViewer.setInput(writableList);
+		//
+		ObservableListContentProvider listContentProvider_1 = new ObservableListContentProvider();
+		comboViewer_1.setContentProvider(listContentProvider_1);
+		//
+		IObservableMap observeMap_1 = PojoObservables
+				.observeMap(listContentProvider_1.getKnownElements(),
+						Location.class, "loc");
+		comboViewer_1.setLabelProvider(new ObservableMapLabelProvider(
+				observeMap_1));
+		//
+		WritableList writableList_1 = new WritableList(itemLocation,
+				Location.class);
+		comboViewer_1.setInput(writableList_1);
 	}
 }

@@ -1,4 +1,4 @@
-package ramo.klevis.openrental.parts.checkout;
+package ramo.klevis.openrental.forms;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -214,7 +214,7 @@ public class FormSearchPerson extends Shell {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				listCustomer = customerDao.searchCustomer(getPersonSearch());
+				listCustomer = getCustomerDao().searchCustomer(getPersonSearch());
 
 				if (listCustomer != null) {
 					WritableList writableList = new WritableList(listCustomer,
@@ -354,5 +354,13 @@ public class FormSearchPerson extends Shell {
 		bindingContext.bindValue(text_1ObserveTextObserveWidget, personSearchSurnameObserveValue, null, null);
 		//
 		return bindingContext;
+	}
+
+	public ICustomerDao getCustomerDao() {
+		return customerDao;
+	}
+
+	public void setCustomerDao(ICustomerDao customerDao) {
+		this.customerDao = customerDao;
 	}
 }

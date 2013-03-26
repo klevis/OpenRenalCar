@@ -1,4 +1,4 @@
-package ramo.klevis.openrental.parts.checkout;
+package ramo.klevis.openrental.forms;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.beans.PojoObservables;
@@ -26,9 +26,9 @@ public class FormMainDriver extends Composite {
 	private Text drlicnrText;
 	private Text drplaceText;
 
-	public FormMainDriver(Composite parent, int style, Customer customer) {
+	public FormMainDriver(Composite parent, int style) {
 		super(parent, style);
-		this.rental = customer;
+//		this.rental = customer;
 		System.err.println("rantali ne init" + this.rental);
 		GridLayout gridLayout = new GridLayout(2, false);
 		setLayout(gridLayout);

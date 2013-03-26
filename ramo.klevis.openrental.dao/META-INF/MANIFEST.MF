@@ -8,5 +8,5 @@ Require-Bundle: javax.persistence;bundle-version="2.0.3",
  ramo.klevis.openrental.utils;bundle-version="1.0.0",
  ramo.klevis.openrental.database;bundle-version="1.0.0",
  ramo.klevis.openrental.idao;bundle-version="1.0.0"
-Service-Component: OSGI-INF/rentaldao.xml,OSGI-INF/agentdao.xml,OSGI-INF/customerdao.xml,OSGI-INF/carsdao.xml,OSGI-INF/atomicchooserdao.xml,OSGI-INF/classdao.xml,
- OSGI-INF/userdao.xml
+Service-Component: OSGI-INF/rentaldao.xml,OSGI-INF/agentdao.xml,OSGI-INF/customerdao.xml,OSGI-INF/carsdao.xml,OSGI-INF/atomicchooserdao.xml,OSGI-INF/classdao.xml,OSGI-INF/userdao.xml,OSGI-INF/locationdao.xml,
+ OSGI-INF/freecarsdao.xml
