@@ -18,15 +18,18 @@ import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindowElement;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
-import ramo.klevis.national.ibuisnesslogic.IAgentDao;
 import ramo.klevis.openrental.entity.Car;
 import ramo.klevis.openrental.forms.FormAdditionalDirver;
 import ramo.klevis.openrental.forms.FormCheckOut;
 import ramo.klevis.openrental.forms.FormCustomer;
 import ramo.klevis.openrental.forms.FormMainDriver;
+import ramo.klevis.openrental.iservice.ICheckOutConsumer;
+
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class PartCheckOut {
 
@@ -34,21 +37,44 @@ public class PartCheckOut {
 		// TODO Auto-generated constructor stub
 	}
 
+	private FormCheckOut formCheckOut;
+
+	private Composite parent;
+	private Car selectedCar;
+
+	private ICheckOutConsumer checkOutConsumer;
+
 	@Inject
-	EPartService partService;	
+	@PostConstruct
+	public void createControls(Composite parent,
+			ICheckOutConsumer checkOutConsumer) {
+		parent.setLayout(null);
+
+		this.checkOutConsumer = checkOutConsumer;
+		this.parent = parent;
+
+	}
+
 	@Inject
 	@Optional
 	public void showCSelectedCar(@EventTopic(value = "CarSelected") Car car
 
-	, MTrimmedWindow mTrimmedWindow) {
-		
-		
+	, MPerspective mPerspective) {
 
-		showPartWithId(mTrimmedWindow,
-				"ramo.klevis.openrental.partsashcontainer.0", true);
+		disposeSelectCarWindow(mPerspective);
+		this.selectedCar = car;
+		loadCheckOutInfo(parent);
 
 	}
 
+	private void disposeSelectCarWindow(MPerspective mPerspective) {
+		List<MWindow> windows = mPerspective.getWindows();
+		for (MWindow mWindow : windows) {
+			mWindow.setVisible(false);
+		}
+	}
+
+	@Deprecated
 	private void showPartWithId(MTrimmedWindow mTrimmedWindow, String id,
 			boolean show) {
 		List<MWindowElement> children = mTrimmedWindow.getChildren();
@@ -79,11 +105,7 @@ public class PartCheckOut {
 							}
 						}
 
-						List<MWindow> windows = mPerspective.getWindows();
-						for (MWindow mWindow : windows) {
-
-							mWindow.setVisible(false);
-						}
+						disposeSelectCarWindow(mPerspective);
 					}
 				}
 
@@ -91,30 +113,41 @@ public class PartCheckOut {
 		}
 	}
 
-	@Inject
-	@PostConstruct
-	public void createControls(Composite parent, MTrimmedWindow mTrimmedWindow) {
-		parent.setLayout(null);
-
+	private void loadCheckOutInfo(Composite parent) {
 		FormCustomer formCustomer = new FormCustomer(parent, SWT.NONE);
-		formCustomer.setBounds(10, 59, 702, 100);
+		formCustomer.setBounds(10, 23, 702, 100);
 
 		FormMainDriver formMainDriver = new FormMainDriver(parent, SWT.NONE);
-		formMainDriver.setBounds(10, 202, 273, 231);
+		formMainDriver.setBounds(10, 148, 273, 231);
 
 		Label label = new Label(parent, SWT.SEPARATOR | SWT.VERTICAL);
-		label.setBounds(307, 202, 2, 361);
+		label.setBounds(308, 148, 2, 361);
 
 		FormAdditionalDirver formAdditionalDirver = new FormAdditionalDirver(
 				parent, SWT.NONE);
-		formAdditionalDirver.setBounds(327, 202, 265, 361);
+		formAdditionalDirver.setBounds(327, 148, 265, 361);
 
-		FormCheckOut formCheckOut = new FormCheckOut(parent, SWT.NONE);
-		formCheckOut.setBounds(10, 594, 761, 231);
+		formCheckOut = new FormCheckOut(parent, SWT.NONE);
+		formCheckOut.setCheckOutConsumer(checkOutConsumer);
+		formCheckOut.setCarSelected(selectedCar);
+		formCheckOut.setBounds(10, 515, 761, 231);
 
-		showPartWithId(mTrimmedWindow,
-				"ramo.klevis.openrental.partsashcontainer.0", false);
+		Label lblNewLabel = new Label(parent, SWT.NONE);
+		lblNewLabel.setFont(SWTResourceManager.getFont("Ubuntu", 12, SWT.BOLD));
+		lblNewLabel.setBounds(10, 0, 98, 17);
+		lblNewLabel.setText("Customer");
 
+		Label lblMainDriver = new Label(parent, SWT.NONE);
+		lblMainDriver.setFont(SWTResourceManager
+				.getFont("Ubuntu", 12, SWT.BOLD));
+		lblMainDriver.setBounds(10, 129, 113, 17);
+		lblMainDriver.setText("Main Driver");
+
+		Label lblAdditionalDriver = new Label(parent, SWT.NONE);
+		lblAdditionalDriver.setText("Additional Driver");
+		lblAdditionalDriver.setFont(SWTResourceManager.getFont("Ubuntu", 12,
+				SWT.BOLD));
+		lblAdditionalDriver.setBounds(310, 125, 135, 17);
 	}
 
 	@PreDestroy

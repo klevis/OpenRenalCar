@@ -61,10 +61,13 @@ import ramo.klevis.openrental.entity.Agent;
 import ramo.klevis.openrental.entity.Car;
 import ramo.klevis.openrental.entity.Customer;
 import ramo.klevis.openrental.entity.Rental;
+import ramo.klevis.openrental.iservice.ICheckOutConsumer;
 import ramo.klevis.openrental.utils.CarImageHolder;
 import ramo.klevis.openrental.utils.Money;
 import ramo.klevis.openrental.utils.RentalStatus;
 import org.eclipse.wb.swt.ResourceManager;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.core.databinding.beans.PojoProperties;
 
 public class FormCheckOut extends Composite {
 	private DataBindingContext m_bindingContext;
@@ -74,17 +77,14 @@ public class FormCheckOut extends Composite {
 	// ICustomerPiketLLogic piketLLogic = new CustomerPiketLLogic();
 
 	private Car carSelected;
-	private FormSearchPerson formSearchPerson;
 	private Rental newRental = new Rental();
 	private Customer customerSelected;
 
-	private FormMainDriver formMainDriver;
-	private Text text_4;
+	private Text textMilage;
 	private Text txtTotali;
-	private Text txtGarancia; 
+	private Text txtGarancia;
 	private Text txtNrditeve;
 	private Text txtPagesaPerdite;
-	private IRentalDao rentalDao;
 
 	private Button btnNewButton;
 
@@ -92,69 +92,19 @@ public class FormCheckOut extends Composite {
 	private Scale scale;
 
 	private Combo comboMoney;
-	private ICustomerDao customerDao;
-
-	
 
 	boolean rentalCall = false;
 
 	List<Agent> listAgent = new ArrayList<Agent>();
-
-	
-
-	private IAgentDao agentDao;
-
-	
-
-//	public FormCheckOut(Rental ren, Composite parent) {
-//		// TODO Auto-generated constructor stub
-//
-//		this(parent, 0, ren.getCar(),null);
-//
-////		this.setBounds(20, 20, 1024, 800);
-//		Car car = ren.getCar();
-//
-//		if (car.getNrditeve() == 0) {
-//			car.setNrditeve(ren.getRentdays());
-//		}
-//
-//		customerSelected = ren.getCustomer();
-//		if (ren.getRentalStatus() == RentalStatus.REZERVATION) {
-//
-//			customerSelected = new Customer();
-//		}
-//		carImageHolder.setBounds(730, 390, 216, 135);
-//		setNewRental(ren);
-//		scale.setSelection(getNewRental().getKmout());
-//		formMainDriver.setRental(customerSelected, true);
-////		formAdditionalDirver.setRental(getNewRental(), true);
-////		formCustomer.setCustomer(customerSelected, true);
-//
-//		if (ren.getRentalStatus() == RentalStatus.REZERVATION) {
-////			formCustomer.getPafirstnameText().setText(ren.getPafirstname());
-////			formCustomer.getPalastnameText().setText(ren.getPalastname());
-////			formCustomer.getDrhphoneText().setText(ren.getDrhphone());
-//			String cardnr = ren.getCardnr();
-////			if (cardnr != null)
-////				text_3.setText(cardnr);
-////			String cardexp = ren.getCardexp();
-////			if (cardexp != null)
-////				text_5.setText(cardexp);
-//
-//		} else {
-//
-//			// this.setEnabled(false);
-//		}
-//
-//		initDataBindings();
-//
-//		definePayForDay();
-//		btnBrendaShqiperise.setSelection(getNewRental().isInorout());
-//
-//	}
+	private ICheckOutConsumer checkOutConsumer;
 
 	public void validate() {
 
+	}
+
+	public void fillFields() {
+		listAgent = getCheckOutConsumer().getAgentDao().getAllAgents();
+		addAgents();
 	}
 
 	/**
@@ -164,46 +114,42 @@ public class FormCheckOut extends Composite {
 	 * @param style
 	 * @wbp.parser.constructor
 	 */
-	
 
-
-	public  FormCheckOut(final Composite parent, int style) {
+	public FormCheckOut(final Composite parent, int style) {
 
 		super(parent, 0);
-		setAgentDao(agentDao);
 
-		
 		if (customerSelected == null) {
 			customerSelected = new Customer();
 		}
-//		listAgent = agentDao.getAllAgents();
-//		this.carSelected = seCar;
-//		carImageHolder = new CarImageHolder(parent, 0);
-//		carImageHolder.setBounds(720, 80, 216, 135);
-//
-//		if (this.carSelected.getPic() != null) {
-//
-//			if (carSelected.getPic().length > 0) {
-//				InputStream in = new ByteArrayInputStream(
-//						this.carSelected.getPic());
-//				try {
-//					BufferedImage bImageFromConvert = ImageIO.read(in);
-//					String extent = carSelected.getExtent();
-//					String string = "c:/prov/image." + extent;
-//					if (extent != null) {
-//						ImageIO.write(bImageFromConvert, extent, new File(
-//								string));
-//
-//						carImageHolder.addImage(string);
-//					}
-//
-//				} catch (IOException e1) {
-//					// TODO Auto-generated catch block
-//					e1.printStackTrace();
-//				}
-//			}
-//		}
-//		getFormMainDriver().setBounds(10, 197, 260, 245);
+		// listAgent = agentDao.getAllAgents();
+		// this.carSelected = seCar;
+		// carImageHolder = new CarImageHolder(parent, 0);
+		// carImageHolder.setBounds(720, 80, 216, 135);
+		//
+		// if (this.carSelected.getPic() != null) {
+		//
+		// if (carSelected.getPic().length > 0) {
+		// InputStream in = new ByteArrayInputStream(
+		// this.carSelected.getPic());
+		// try {
+		// BufferedImage bImageFromConvert = ImageIO.read(in);
+		// String extent = carSelected.getExtent();
+		// String string = "c:/prov/image." + extent;
+		// if (extent != null) {
+		// ImageIO.write(bImageFromConvert, extent, new File(
+		// string));
+		//
+		// carImageHolder.addImage(string);
+		// }
+		//
+		// } catch (IOException e1) {
+		// // TODO Auto-generated catch block
+		// e1.printStackTrace();
+		// }
+		// }
+		// }
+		// getFormMainDriver().setBounds(10, 197, 260, 245);
 
 		Label lblKarburantiNeLitra = new Label(this, SWT.NONE);
 		lblKarburantiNeLitra.setBounds(10, 31, 141, 19);
@@ -213,7 +159,7 @@ public class FormCheckOut extends Composite {
 		lblOdometer.setBounds(296, 31, 76, 19);
 		lblOdometer.setText("Odometer");
 
-		text_4 = new Text(this, SWT.BORDER);
+		textMilage = new Text(this, SWT.BORDER);
 		// text_4.addVerifyListener(new VerifyListener() {
 		// public void verifyText(VerifyEvent arg0) {
 		//
@@ -221,11 +167,11 @@ public class FormCheckOut extends Composite {
 		// }
 		//
 		// });
-		text_4.setBounds(378, 31, 145, 19);
-		if(carSelected==null){
-			carSelected=new Car();
+		textMilage.setBounds(378, 31, 145, 19);
+		if (carSelected == null) {
+			carSelected = new Car();
 		}
-		text_4.setText("" + carSelected.getMilage());
+		textMilage.setText("" + carSelected.getMilage());
 		FieldDecoration fieldDecoration = FieldDecorationRegistry.getDefault()
 				.getFieldDecoration(FieldDecorationRegistry.DEC_ERROR);
 
@@ -335,15 +281,15 @@ public class FormCheckOut extends Composite {
 
 					getNewRental().setCar(carSelected);
 
-//					customerSelected = getFormCustomer().getCustomer();
-//					Customer customer = getFormMainDriver().getRental();
+					// customerSelected = getFormCustomer().getCustomer();
+					// Customer customer = getFormMainDriver().getRental();
 
 					System.err.println("pasport id "
 							+ customerSelected.getDrpasportid());
 					getNewRental().setLocation(
 							FormAvaibleCar.beanAvaibleCar.getLocation());
 					getNewRental().setCustomer(customerSelected);
- 
+
 					getNewRental().setStarttime(
 							FormAvaibleCar.beanAvaibleCar.getFromDate());
 					getNewRental().setRentdays(
@@ -404,7 +350,8 @@ public class FormCheckOut extends Composite {
 						getNewRental().setAgentpayed(false);
 					}
 
-					getNewRental().setKmout(Integer.parseInt(text_4.getText()));
+					getNewRental().setKmout(
+							Integer.parseInt(textMilage.getText()));
 					int kmout = getNewRental().getKmout();
 
 					System.out.println("Vlera e kilometrave eshte :" + kmout);
@@ -414,12 +361,13 @@ public class FormCheckOut extends Composite {
 					System.out.println(">>>>>>>>>>>>>>> "
 							+ getNewRental().getCustomer().getDrlicnr() + "  "
 							+ getNewRental().getCustomer().getDrfirstname());
-//					getNewRental().getCustomer().setCardnr(text_3.getText());
-//					getNewRental().getCustomer().setCardexp(text_5.getText());
-//					getNewRental().setCardexp(text_5.getText());
+					// getNewRental().getCustomer().setCardnr(text_3.getText());
+					// getNewRental().getCustomer().setCardexp(text_5.getText());
+					// getNewRental().setCardexp(text_5.getText());
 
-					boolean controlCustomer = getCustomerDao().controlCustomer(
-							getNewRental().getCustomer());
+					boolean controlCustomer = getCheckOutConsumer()
+							.getCustomerDao().controlCustomer(
+									getNewRental().getCustomer());
 
 					if (controlCustomer) {
 						boolean resultQ = MessageDialog.openQuestion(
@@ -433,8 +381,8 @@ public class FormCheckOut extends Composite {
 
 					}
 
-//					if (text_3.isEnabled())
-//						getNewRental().setCardnr(text_3.getText());
+					// if (text_3.isEnabled())
+					// getNewRental().setCardnr(text_3.getText());
 					// eshte bere comment sa te zgjidhet google api
 					// new Thread(new Runnable() {
 					//
@@ -485,8 +433,8 @@ public class FormCheckOut extends Composite {
 					Rental llogAtCheckOut = piketLLogic
 							.llogAtCheckOut(getNewRental());
 					setNewRental(llogAtCheckOut);
-					Rental registerRental = getRentalDao().registerRental(
-							getNewRental());
+					Rental registerRental = getCheckOutConsumer()
+							.getRentalDao().registerRental(getNewRental());
 					if (registerRental != null) {
 
 						getNewRental().setId(registerRental.getId());
@@ -531,11 +479,10 @@ public class FormCheckOut extends Composite {
 		getBtnKontrata().setText("Printo Kontraten");
 		getBtnKontrata().setVisible(false);
 
-		m_bindingContext = initDataBindings();
-		definePayForDay();
+		// m_bindingContext = initDataBindings();
 
-		txtGarancia.setText("" + carSelected.getDeposit());
-		text_4.setText("" + carSelected.getMilage());
+		// txtGarancia.setText("" + carSelected.getDeposit());
+		// textMilage.setText("" + carSelected.getMilage());
 		scale = new Scale(this, SWT.NONE);
 		scale.setPageIncrement(1);
 		scale.setMaximum(6);
@@ -565,7 +512,9 @@ public class FormCheckOut extends Composite {
 		comboViewerAgents = new ComboViewer(this, SWT.NONE);
 		Combo combo = comboViewerAgents.getCombo();
 		combo.setBounds(87, 106, 129, 29);
-		setTabList(new Control[]{text_4, txtTotali, txtGarancia, txtNrditeve, txtPagesaPerdite, comboMoney, button, btnNewButton, btnKontrata, scale});
+		setTabList(new Control[] { textMilage, txtTotali, txtGarancia,
+				txtNrditeve, txtPagesaPerdite, comboMoney, button,
+				btnNewButton, btnKontrata, scale });
 
 		ObservableListContentProvider listContentProvider = new ObservableListContentProvider();
 		IObservableMap observeMap = PojoObservables.observeMap(
@@ -574,68 +523,69 @@ public class FormCheckOut extends Composite {
 		comboViewerAgents.setLabelProvider(new ObservableMapLabelProvider(
 				observeMap));
 		comboViewerAgents.setContentProvider(listContentProvider);
+		m_bindingContext = initDataBindings();
 		//
-		IListProperty selfList = Properties.selfList(Agent.class);
-		IObservableList observe = selfList.observe(listAgent);
-		comboViewerAgents.setInput(observe);
 
 	}
 
-//	public void addCardCrdencials() {
-//
-//		if (customerSelected != null) {
-//
-//			String cardnr = customerSelected.getCardnr();
-//			if (cardnr != null)
-//				text_3.setText(cardnr);
-//			String cardexp = customerSelected.getCardexp();
-//			if (cardexp != null)
-//				text_5.setText(cardexp);
-//		}
-//	}
-//
-//	public void addCardCrdencials(Customer c) {
-//
-//		if (c != null) {
-//
-//			String cardnr = c.getCardnr();
-//			if (cardnr != null)
-//				text_3.setText(cardnr);
-//			String cardexp = c.getCardexp();
-//			if (cardexp != null)
-//				text_5.setText(cardexp);
-//		}
-//	}
+	private void addAgents() {
+		IListProperty selfList = Properties.selfList(Agent.class);
+		IObservableList observe = selfList.observe(listAgent);
+		comboViewerAgents.setInput(observe);
+	}
 
-	private void definePayForDay() {
+	// public void addCardCrdencials() {
+	//
+	// if (customerSelected != null) {
+	//
+	// String cardnr = customerSelected.getCardnr();
+	// if (cardnr != null)
+	// text_3.setText(cardnr);
+	// String cardexp = customerSelected.getCardexp();
+	// if (cardexp != null)
+	// text_5.setText(cardexp);
+	// }
+	// }
+	//
+	// public void addCardCrdencials(Customer c) {
+	//
+	// if (c != null) {
+	//
+	// String cardnr = c.getCardnr();
+	// if (cardnr != null)
+	// text_3.setText(cardnr);
+	// String cardexp = c.getCardexp();
+	// if (cardexp != null)
+	// text_5.setText(cardexp);
+	// }
+	// }
 
-		int rentdays = 0;
-		try {
-			rentdays = Integer.parseInt(txtNrditeve.getText());
-		} catch (Exception e) {
-			// TODO: handle exception
+	private void definePayForDay(Car car) {
 
-			rentdays = 0;
-		}
+		int rentdays = car.getNrditeve();
+
 		if (rentdays >= 1 && rentdays <= 2) {
 
-			txtPagesaPerdite.setText("" + carSelected.get_drate2());
+			carSelected.setPayForDay("" + carSelected.get_drate2());
 		} else if (rentdays >= 3 && rentdays <= 6) {
 
-			txtPagesaPerdite.setText("" + carSelected.get_drate3());
+			carSelected.setPayForDay("" + carSelected.get_drate3());
 
 		} else if (rentdays >= 7 && rentdays <= 11) {
 
-			txtPagesaPerdite.setText("" + carSelected.get_drate4());
+			carSelected.setPayForDay("" + carSelected.get_drate4());
 		} else if (rentdays >= 12 && rentdays <= 25) {
 
-			txtPagesaPerdite.setText("" + carSelected.get_drate5());
+			carSelected.setPayForDay("" + carSelected.get_drate5());
 
 		} else if (rentdays >= 26 && rentdays <= 35) {
 
-			txtPagesaPerdite.setText("" + carSelected.get_drate6());
+			carSelected.setPayForDay("" + carSelected.get_drate6());
 
 		}
+
+		String payForDay = carSelected.getPayForDay();
+		System.err.println(payForDay);
 
 	}
 
@@ -646,6 +596,11 @@ public class FormCheckOut extends Composite {
 
 	public void setCarSelected(Car carSelected) {
 		this.carSelected = carSelected;
+
+		definePayForDay(carSelected);
+		fillFields();
+		initDataBindings();
+
 	}
 
 	public Car getCarSelected() {
@@ -662,33 +617,6 @@ public class FormCheckOut extends Composite {
 
 	public void setFormCustomer(FormCustomer formCustomer) {
 	}
-
-	
-
-	public void setFormMainDriver(FormMainDriver formMainDriver) {
-		this.formMainDriver = formMainDriver;
-	}
-
-//	public FormMainDriver getFormMainDriver() {
-//		return formMainDriver;
-//	}
-
-	public void setFormAdditionalDirver(
-			FormAdditionalDirver formAdditionalDirver) {
-	}
-
-
-
-//	public void setFormSearchPerson(FormSearchPerson formSearchPerson) {
-//		
-//		
-//		this.formSearchPerson = formSearchPerson;
-//		this.formSearchPerson.setCustomerDao(getCustomerDao());
-//	}
-//
-//	public FormSearchPerson getFormSearchPerson() {
-//		return formSearchPerson;
-//	}
 
 	public void setNewRental(Rental newRental) {
 		this.newRental = newRental;
@@ -708,7 +636,8 @@ public class FormCheckOut extends Composite {
 
 	public void setBtnNewButton(Button btnNewButton) {
 		this.btnNewButton = btnNewButton;
-		btnNewButton.setImage(ResourceManager.getPluginImage("ramo.klevis.openrental", "icons/rentcar.png"));
+		btnNewButton.setImage(ResourceManager.getPluginImage(
+				"ramo.klevis.openrental", "icons/rentcar.png"));
 	}
 
 	public Button getBtnNewButton() {
@@ -749,8 +678,6 @@ public class FormCheckOut extends Composite {
 
 	private ComboViewer comboViewerAgents;
 
-	private Binding bindValue;
-
 	public void addValidatorNumber(IObservableValue v, IObservableValue v2,
 			DataBindingContext binding) {
 		UpdateValueStrategy updateValueStrategy = new UpdateValueStrategy();
@@ -764,43 +691,57 @@ public class FormCheckOut extends Composite {
 	public void dispose() {
 		// TODO Auto-generated method stub
 
-		carImageHolder.dispose();
+		// carImageHolder.dispose();
 		super.dispose();
 
 	}
 
-	public IRentalDao getRentalDao() {
-		return rentalDao;
+	public ICheckOutConsumer getCheckOutConsumer() {
+		return checkOutConsumer;
 	}
 
-	public void setRentalDao(IRentalDao rentalDao) {
-		this.rentalDao = rentalDao;
+	public void setCheckOutConsumer(ICheckOutConsumer checkOutConsumer) {
+		this.checkOutConsumer = checkOutConsumer;
 	}
 
-	public ICustomerDao getCustomerDao() {
-		return customerDao;
-	}
-
-	public void setCustomerDao(ICustomerDao customerDao) {
-		this.customerDao = customerDao;
-	}
-
-	public IAgentDao getAgentDao() {
-		return agentDao;
-	}
-
-	public void setAgentDao(IAgentDao agentDao) {
-
-		System.err.println("U be set");
-		this.agentDao = agentDao;
-	}
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
-		IObservableValue text_4ObserveTextObserveWidget = SWTObservables.observeText(text_4, SWT.Modify);
-		IObservableValue newRentalKmoutObserveValue = PojoObservables.observeValue(newRental, "kmout");
+		IObservableValue text_4ObserveTextObserveWidget = SWTObservables
+				.observeText(textMilage, SWT.Modify);
+		IObservableValue newRentalKmoutObserveValue = PojoObservables
+				.observeValue(newRental, "kmout");
 		UpdateValueStrategy strategy = new UpdateValueStrategy();
-		bindValue = bindingContext.bindValue(text_4ObserveTextObserveWidget, newRentalKmoutObserveValue, strategy, null);
+		bindingContext.bindValue(text_4ObserveTextObserveWidget,
+				newRentalKmoutObserveValue, strategy, null);
+		//
+		IObservableValue observeTextTxtNrditeveObserveWidget = WidgetProperties
+				.text(SWT.Modify).observe(txtNrditeve);
+		IObservableValue nrditeveCarSelectedObserveValue = PojoObservables
+				.observeValue(carSelected, "nrditeve");
+		bindingContext.bindValue(observeTextTxtNrditeveObserveWidget,
+				nrditeveCarSelectedObserveValue, null, null);
+		//
+		IObservableValue observeTextTxtPagesaPerditeObserveWidget = WidgetProperties
+				.text(SWT.Modify).observe(txtPagesaPerdite);
+		IObservableValue payForDayCarSelectedObserveValue = PojoObservables
+				.observeValue(carSelected, "payForDay");
+		bindingContext.bindValue(observeTextTxtPagesaPerditeObserveWidget,
+				payForDayCarSelectedObserveValue, null, null);
+		//
+		IObservableValue observeTextTxtGaranciaObserveWidget = WidgetProperties
+				.text(SWT.Modify).observe(txtGarancia);
+		IObservableValue depositCarSelectedObserveValue = PojoObservables
+				.observeValue(carSelected, "deposit");
+		bindingContext.bindValue(observeTextTxtGaranciaObserveWidget,
+				depositCarSelectedObserveValue, null, null);
+		//
+		IObservableValue observeTextTextMilageObserveWidget = WidgetProperties
+				.text(SWT.Modify).observe(textMilage);
+		IObservableValue milageCarSelectedObserveValue = PojoObservables
+				.observeValue(carSelected, "milage");
+		bindingContext.bindValue(observeTextTextMilageObserveWidget,
+				milageCarSelectedObserveValue, null, null);
 		//
 		return bindingContext;
 	}

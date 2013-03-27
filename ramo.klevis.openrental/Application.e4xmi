@@ -3,9 +3,12 @@
   <children xsi:type="basic:TrimmedWindow" xmi:id="_Fn6q8YzcEeKs6vbzRrpELA" label="ramo.klevis.openrental" width="1024" height="800">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_taJp8IzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.perspectivestack.0" selectedElement="_uUnuIIzcEeKs6vbzRrpELA">
       <children xsi:type="advanced:Perspective" xmi:id="_uUnuIIzcEeKs6vbzRrpELA" elementId="Perspective CheckOut" selectedElement="_6U5CEIzcEeKs6vbzRrpELA">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_6U5CEIzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.partsashcontainer.0">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_6U5CEIzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.partsashcontainer.0" containerData="" selectedElement="_tKtusJa_EeKMAZl0-6t-pA" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_tKtusJa_EeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.partstack.1" containerData="3000">
+            <children xsi:type="basic:Part" xmi:id="_t7PMsJa_EeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.part.0" contributionURI="bundleclass://ramo.klevis.openrental.checkout/ramo.klevis.openrental.parts.checkout.PartSelectedCarInfo" label="Selected Car Info"/>
+          </children>
           <children xsi:type="basic:PartStack" xmi:id="_4reF0IzfEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.partstack.0">
-            <children xsi:type="basic:Part" xmi:id="_7HeVkIzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.part.0" contributionURI="bundleclass://ramo.klevis.openrental.checkout/ramo.klevis.openrental.parts.checkout.PartCheckOut" label="lABEL mOTHER" tooltip="lABEL"/>
+            <children xsi:type="basic:Part" xmi:id="_7HeVkIzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.part.0" contributionURI="bundleclass://ramo.klevis.openrental.checkout/ramo.klevis.openrental.parts.checkout.PartCheckOut" label="Check Out Info" tooltip="lABEL"/>
           </children>
         </children>
         <windows xmi:id="_7vbZwJYZEeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.window.0" label="Select a free car please" width="700" height="500">

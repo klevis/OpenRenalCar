@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="ramo.klevis.openrental.service">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="ramo.klevis.openrental.freecarsservice">
    <implementation class="ramo.klevis.openrental.service.FreeCarsConsumer"/>
    <reference bind="setLocationDao" cardinality="1..1" interface="ramo.klevis.national.ibuisnesslogic.ILocationDao" name="ILocationDao" policy="static"/>
    <reference bind="setClassDao" cardinality="1..1" interface="ramo.klevis.national.ibuisnesslogic.IClassDao" name="IClassDao" policy="static"/>
