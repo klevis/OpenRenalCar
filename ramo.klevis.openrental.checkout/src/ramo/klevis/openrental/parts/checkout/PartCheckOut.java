@@ -59,6 +59,9 @@ public class PartCheckOut {
 	MPerspective mPerspective;
 
 	@Inject
+	EPartService partService;
+
+	@Inject
 	@PostConstruct
 	public void createControls(Composite parent,
 			ICheckOutConsumer checkOutConsumer, MPerspective mPerspective) {
@@ -73,12 +76,32 @@ public class PartCheckOut {
 
 	@Inject
 	@Optional
+	public void clearAll(@EventTopic("ClearAllCheckOut") String s) {
+		// if (formAdditionalDirver != null) {
+		// formAdditionalDirver.dispose();
+		// formAdditionalDirver = null;
+		// }
+		// if (formMainDriver != null) {
+		// formMainDriver.dispose();
+		// formMainDriver = null;
+		// }
+		// if (formCheckOut != null) {
+		// formCheckOut.dispose();
+		// formCheckOut = null;
+		// }
+		disposeWindowWithId(mPerspective, "Customer Selection");
+
+	}
+
+	@Inject
+	@Optional
 	public void showSelectedCar(@EventTopic(value = "CarSelected") Car car
 
 	, MPerspective mPerspective) {
 
 		disposeWindowWithId(mPerspective, "Car Selection");
 		this.selectedCar = car;
+
 		loadCheckOutInfo(parent);
 
 	}

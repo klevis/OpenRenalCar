@@ -17,10 +17,18 @@ import ramo.klevis.openrental.forms.FormSelectedCar;
 public class PartSelectedCarInfo {
 
 	private FormSelectedCar formSelectedCar;
+	Composite parent;
 
 	public PartSelectedCarInfo() {
 	}
 
+	@Inject
+	@Optional
+	public void clearAll(@EventTopic("ClearAllCheckOut") String s) {
+//		formSelectedCar = new FormSelectedCar(parent, SWT.NONE);
+		
+	}
+	
 	@Inject
 	@Optional
 	public void showCSelectedCar(@EventTopic(value = "CarSelected") Car car) {
@@ -34,6 +42,7 @@ public class PartSelectedCarInfo {
 	@PostConstruct
 	public void createControls(Composite parent) {
 
+		this.parent=parent;
 		formSelectedCar = new FormSelectedCar(parent, SWT.NONE);
 
 	}

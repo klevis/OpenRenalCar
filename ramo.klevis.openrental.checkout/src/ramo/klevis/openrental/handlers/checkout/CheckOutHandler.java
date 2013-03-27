@@ -15,6 +15,7 @@ import java.lang.reflect.InvocationTargetException;
 import javax.inject.Inject;
 
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimmedWindow;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
@@ -27,11 +28,12 @@ public class CheckOutHandler {
 	EPartService partService;
 
 	@Execute
-	public void execute(  
+	public void execute(
 
-	MTrimmedWindow mTrimmedWindow, MHandledMenuItem mHandledMenuItem)
+	MTrimmedWindow mTrimmedWindow, MHandledMenuItem mHandledMenuItem,IEventBroker eventBroker)
 			throws InvocationTargetException, InterruptedException {
 
+		eventBroker.send("ClearAllCheckOut", "OK");
 		PerspectiveSwitcher.switchPerspective(mTrimmedWindow,
 				mHandledMenuItem.getTags(), partService);
 
