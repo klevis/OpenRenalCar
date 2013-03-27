@@ -597,6 +597,7 @@ public class FormCheckOut extends Composite {
 	public void setCarSelected(Car carSelected) {
 		this.carSelected = carSelected;
 
+		if(carSelected!=null)
 		definePayForDay(carSelected);
 		fillFields();
 		initDataBindings();

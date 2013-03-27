@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 
 import ramo.klevis.openrental.entity.Car;
+import ramo.klevis.openrental.entity.Customer;
 import ramo.klevis.openrental.forms.FormAdditionalDirver;
 import ramo.klevis.openrental.forms.FormCheckOut;
 import ramo.klevis.openrental.forms.FormCustomer;
@@ -30,6 +31,10 @@ import ramo.klevis.openrental.forms.FormMainDriver;
 import ramo.klevis.openrental.iservice.ICheckOutConsumer;
 
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.wb.swt.ResourceManager;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 public class PartCheckOut {
 
@@ -44,33 +49,72 @@ public class PartCheckOut {
 
 	private ICheckOutConsumer checkOutConsumer;
 
+	private FormCustomer formCustomer;
+
+	private FormMainDriver formMainDriver;
+
+	private FormAdditionalDirver formAdditionalDirver;
+
+	Customer customerSelected;
+	MPerspective mPerspective;
+
 	@Inject
 	@PostConstruct
 	public void createControls(Composite parent,
-			ICheckOutConsumer checkOutConsumer) {
+			ICheckOutConsumer checkOutConsumer, MPerspective mPerspective) {
 		parent.setLayout(null);
 
+		this.mPerspective = mPerspective;
 		this.checkOutConsumer = checkOutConsumer;
 		this.parent = parent;
+		// loadCheckOutInfo(parent);
 
 	}
 
 	@Inject
 	@Optional
-	public void showCSelectedCar(@EventTopic(value = "CarSelected") Car car
+	public void showSelectedCar(@EventTopic(value = "CarSelected") Car car
 
 	, MPerspective mPerspective) {
 
-		disposeSelectCarWindow(mPerspective);
+		disposeWindowWithId(mPerspective, "Car Selection");
 		this.selectedCar = car;
 		loadCheckOutInfo(parent);
 
 	}
 
-	private void disposeSelectCarWindow(MPerspective mPerspective) {
+	@Inject
+	@Optional
+	public void showSelectedcustomer(
+			@EventTopic(value = "CustomerSelected") Customer customer,
+			MPerspective mPerspective) {
+
+		disposeWindowWithId(mPerspective, "Customer Selection");
+		this.customerSelected = customer;
+
+		formCustomer.setCustomer(customer);
+
+		formMainDriver.setCustomer(customer);
+	}
+
+	private void showWindowWithId(MPerspective mPerspective, String id) {
 		List<MWindow> windows = mPerspective.getWindows();
 		for (MWindow mWindow : windows) {
-			mWindow.setVisible(false);
+			if (mWindow.getElementId().equals(id))
+				mWindow.setVisible(true);
+			List<MWindowElement> children = mWindow.getChildren();
+			for (MWindowElement mWindowElement : children) {
+
+				mWindowElement.setVisible(true);
+			}
+		}
+	}
+
+	private void disposeWindowWithId(MPerspective mPerspective, String id) {
+		List<MWindow> windows = mPerspective.getWindows();
+		for (MWindow mWindow : windows) {
+			if (mWindow.getElementId().equals(id))
+				mWindow.setVisible(false);
 		}
 	}
 
@@ -105,7 +149,7 @@ public class PartCheckOut {
 							}
 						}
 
-						disposeSelectCarWindow(mPerspective);
+						disposeWindowWithId(mPerspective, id);
 					}
 				}
 
@@ -114,19 +158,31 @@ public class PartCheckOut {
 	}
 
 	private void loadCheckOutInfo(Composite parent) {
-		FormCustomer formCustomer = new FormCustomer(parent, SWT.NONE);
-		formCustomer.setBounds(10, 23, 702, 100);
 
-		FormMainDriver formMainDriver = new FormMainDriver(parent, SWT.NONE);
+		if (formCustomer != null) {
+			formCustomer.dispose();
+		}
+		formCustomer = new FormCustomer(parent, SWT.NONE);
+		formCustomer.setBounds(10, 31, 702, 92);
+
+		if (formMainDriver != null) {
+			formMainDriver.dispose();
+		}
+		formMainDriver = new FormMainDriver(parent, SWT.NONE);
 		formMainDriver.setBounds(10, 148, 273, 231);
 
 		Label label = new Label(parent, SWT.SEPARATOR | SWT.VERTICAL);
 		label.setBounds(308, 148, 2, 361);
 
-		FormAdditionalDirver formAdditionalDirver = new FormAdditionalDirver(
-				parent, SWT.NONE);
+		if (formAdditionalDirver != null) {
+			formAdditionalDirver.dispose();
+		}
+		formAdditionalDirver = new FormAdditionalDirver(parent, SWT.NONE);
 		formAdditionalDirver.setBounds(327, 148, 265, 361);
 
+		if (formCheckOut != null) {
+			formCheckOut.dispose();
+		}
 		formCheckOut = new FormCheckOut(parent, SWT.NONE);
 		formCheckOut.setCheckOutConsumer(checkOutConsumer);
 		formCheckOut.setCarSelected(selectedCar);
@@ -148,6 +204,22 @@ public class PartCheckOut {
 		lblAdditionalDriver.setFont(SWTResourceManager.getFont("Ubuntu", 12,
 				SWT.BOLD));
 		lblAdditionalDriver.setBounds(310, 125, 135, 17);
+		Button btnNewButton = new Button(parent, SWT.NONE);
+		btnNewButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+
+				showWindowWithId(mPerspective, "Customer Selection");
+
+			}
+		});
+		btnNewButton.setImage(ResourceManager.getPluginImage(
+				"ramo.klevis.openrental", "icons/cearch.png"));
+		btnNewButton.setFont(SWTResourceManager.getFont("Ubuntu", 9, SWT.BOLD));
+		btnNewButton.setBounds(112, 2, 157, 25);
+		btnNewButton.setText("Search for customers");
+		parent.layout();
+
 	}
 
 	@PreDestroy

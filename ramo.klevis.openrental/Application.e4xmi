@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_Fn6q8IzcEeKs6vbzRrpELA" elementId="org.eclipse.e4.ide.application">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_Fn6q8YzcEeKs6vbzRrpELA" label="ramo.klevis.openrental" width="1024" height="800">
-    <children xsi:type="advanced:PerspectiveStack" xmi:id="_taJp8IzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.perspectivestack.0" selectedElement="_uUnuIIzcEeKs6vbzRrpELA">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_Fn6q8YzcEeKs6vbzRrpELA" label="ramo.klevis.openrental" width="1024" height="850">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_taJp8IzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.perspectivestack.0" selectedElement="_3HwXEJb1EeKMAZl0-6t-pA">
       <children xsi:type="advanced:Perspective" xmi:id="_uUnuIIzcEeKs6vbzRrpELA" elementId="Perspective CheckOut" selectedElement="_6U5CEIzcEeKs6vbzRrpELA">
         <children xsi:type="basic:PartSashContainer" xmi:id="_6U5CEIzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.partsashcontainer.0" containerData="" selectedElement="_tKtusJa_EeKMAZl0-6t-pA" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_tKtusJa_EeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.partstack.1" containerData="3000">
@@ -11,8 +11,11 @@
             <children xsi:type="basic:Part" xmi:id="_7HeVkIzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.part.0" contributionURI="bundleclass://ramo.klevis.openrental.checkout/ramo.klevis.openrental.parts.checkout.PartCheckOut" label="Check Out Info" tooltip="lABEL"/>
           </children>
         </children>
-        <windows xmi:id="_7vbZwJYZEeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.window.0" label="Select a free car please" width="700" height="500">
+        <windows xmi:id="_7vbZwJYZEeKMAZl0-6t-pA" elementId="Car Selection" label="Select a free car please" width="700" height="500">
           <children xsi:type="basic:Part" xmi:id="__unMIJYZEeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.part.0" contributionURI="bundleclass://ramo.klevis.openrental.checkout/ramo.klevis.openrental.parts.checkout.SelectCarCheckOut"/>
+        </windows>
+        <windows xmi:id="_QoyjUJbgEeKMAZl0-6t-pA" elementId="Customer Selection" visible="false" label="Please select a customer" width="840" height="350">
+          <children xsi:type="basic:Part" xmi:id="_U9D04JbgEeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.part.0" visible="false" contributionURI="bundleclass://ramo.klevis.openrental.checkout/ramo.klevis.openrental.parts.checkout.SelectCustomerCheckOut" label="Customer Search"/>
         </windows>
       </children>
       <children xsi:type="advanced:Perspective" xmi:id="_wHxt0IzcEeKs6vbzRrpELA" elementId="Perspective CheckIn" selectedElement="_9KPekIzcEeKs6vbzRrpELA">
@@ -22,6 +25,7 @@
           </children>
         </children>
       </children>
+      <children xsi:type="advanced:Perspective" xmi:id="_3HwXEJb1EeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.perspective.0"/>
     </children>
     <mainMenu xmi:id="_IMEcwJS-EeKzktioAy7wrg" elementId="ramo.klevis.openrental.menu.0">
       <children xsi:type="menu:Menu" xmi:id="_cVaesJTAEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menu.1" label="Check Out" iconURI="platform:/plugin/ramo.klevis.openrental/icons/arrow.png">

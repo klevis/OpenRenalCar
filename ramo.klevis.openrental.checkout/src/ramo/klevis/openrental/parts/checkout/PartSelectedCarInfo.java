@@ -25,7 +25,6 @@ public class PartSelectedCarInfo {
 	@Optional
 	public void showCSelectedCar(@EventTopic(value = "CarSelected") Car car) {
 
-		System.err.println("car"+car.getNrditeve());
 		formSelectedCar.setSelectedCar(car);
 	}
 

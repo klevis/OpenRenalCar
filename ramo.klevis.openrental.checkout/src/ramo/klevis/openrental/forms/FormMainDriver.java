@@ -92,13 +92,13 @@ public class FormMainDriver extends Composite {
 		return rental;
 	}
 
-	public void setRental(Customer newRental) {
-		setRental(newRental, true);
+	public void setCustomer(Customer customer) {
+		setCustomer(customer, true);
 	}
 
-	public void setRental(Customer newRental,
+	public void setCustomer(Customer custmer,
 			boolean update) {
-		rental = newRental;
+		rental = custmer;
 		if (update) {
 			if (m_bindingContext != null) {
 				m_bindingContext.dispose();
