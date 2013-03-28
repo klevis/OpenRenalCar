@@ -16,6 +16,7 @@ import org.eclipse.e4.ui.model.application.ui.basic.MPartSashContainerElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimmedWindow;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
 import org.eclipse.e4.ui.model.application.ui.basic.MWindowElement;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -29,6 +30,7 @@ import ramo.klevis.openrental.forms.FormCheckOut;
 import ramo.klevis.openrental.forms.FormCustomer;
 import ramo.klevis.openrental.forms.FormMainDriver;
 import ramo.klevis.openrental.iservice.ICheckOutConsumer;
+import ramo.klevis.openrental.utils.PerspectiveSwitcher;
 
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Button;
@@ -60,6 +62,11 @@ public class PartCheckOut {
 
 	@Inject
 	EPartService partService;
+	
+	@Inject
+	EModelService modelService;
+	
+	
 
 	@Inject
 	@PostConstruct
@@ -67,26 +74,28 @@ public class PartCheckOut {
 			ICheckOutConsumer checkOutConsumer, MPerspective mPerspective) {
 		parent.setLayout(null);
 
-		
 		this.mPerspective = mPerspective;
 		this.checkOutConsumer = checkOutConsumer;
 		this.parent = parent;
-		
-//		ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-//		scrolledComposite.setExpandHorizontal(true);
-//		scrolledComposite.setExpandVertical(true);
-//		scrolledComposite.setAlwaysShowScrollBars(true);
-//		 loadCheckOutInfo(parent);
+
+		// ScrolledComposite scrolledComposite = new ScrolledComposite(parent,
+		// SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+		// scrolledComposite.setExpandHorizontal(true);
+		// scrolledComposite.setExpandVertical(true);
+		// scrolledComposite.setAlwaysShowScrollBars(true);
+		// loadCheckOutInfo(parent);
 
 	}
 
 	@Inject
 	@Optional
 	public void clearAll(@EventTopic("ClearAllCheckOut") String s) {
-		disposeWindowWithId(mPerspective, "Customer Selection");
+
 		loadCheckOutInfo(parent);
 
-		showWindowWithId(mPerspective, "Car Selection");
+		PerspectiveSwitcher.showWindowWithId(modelService,mPerspective, "Car Selection");
+		PerspectiveSwitcher.disposeWindowWithId(modelService,mPerspective,
+				"Customer Selection");
 	}
 
 	@Inject
@@ -95,7 +104,7 @@ public class PartCheckOut {
 
 	, MPerspective mPerspective) {
 
-		disposeWindowWithId(mPerspective, "Car Selection");
+		PerspectiveSwitcher.disposeWindowWithId(modelService,mPerspective, "Car Selection");
 		this.selectedCar = car;
 
 		loadCheckOutInfo(parent);
@@ -108,72 +117,13 @@ public class PartCheckOut {
 			@EventTopic(value = "CustomerSelected") Customer customer,
 			MPerspective mPerspective) {
 
-		disposeWindowWithId(mPerspective, "Customer Selection");
+		PerspectiveSwitcher.disposeWindowWithId(modelService,mPerspective,
+				"Customer Selection");
 		this.customerSelected = customer;
 
 		formCustomer.setCustomer(customer);
 
 		formMainDriver.setCustomer(customer);
-	}
-
-	private void showWindowWithId(MPerspective mPerspective, String id) {
-		List<MWindow> windows = mPerspective.getWindows();
-		for (MWindow mWindow : windows) {
-			if (mWindow.getElementId().equals(id))
-				mWindow.setVisible(true);
-			List<MWindowElement> children = mWindow.getChildren();
-			for (MWindowElement mWindowElement : children) {
-
-				mWindowElement.setVisible(true);
-			}
-		}
-	}
-
-	private void disposeWindowWithId(MPerspective mPerspective, String id) {
-		List<MWindow> windows = mPerspective.getWindows();
-		for (MWindow mWindow : windows) {
-			if (mWindow.getElementId().equals(id))
-				mWindow.setVisible(false);
-		}
-	}
-
-	@Deprecated
-	private void showPartWithId(MTrimmedWindow mTrimmedWindow, String id,
-			boolean show) {
-		List<MWindowElement> children = mTrimmedWindow.getChildren();
-
-		for (MWindowElement mWindowElement : children) {
-
-			if (mWindowElement instanceof MPerspectiveStack)
-
-			{
-				MPerspectiveStack mPerspectiveStack = (MPerspectiveStack) mWindowElement;
-
-				List<MPerspective> children2 = mPerspectiveStack.getChildren();
-
-				for (MPerspective mPerspective : children2) {
-
-					if (mPerspective.getElementId().equals(
-							"Perspective CheckOut")) {
-
-						List<MPartSashContainerElement> children3 = mPerspective
-								.getChildren();
-						for (MPartSashContainerElement mPartSashContainerElement : children3) {
-
-							if (mPartSashContainerElement.getElementId()
-									.equals(id)) {
-
-								mPartSashContainerElement.setVisible(show);
-
-							}
-						}
-
-						disposeWindowWithId(mPerspective, id);
-					}
-				}
-
-			}
-		}
 	}
 
 	private void loadCheckOutInfo(Composite parent) {
@@ -228,7 +178,9 @@ public class PartCheckOut {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 
-				showWindowWithId(mPerspective, "Customer Selection");
+				System.err.println("////////////////");
+				PerspectiveSwitcher.showWindowWithId(modelService,mPerspective,
+						"Customer Selection");
 
 			}
 		});

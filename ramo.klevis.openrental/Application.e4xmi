@@ -33,6 +33,7 @@
           <tags>Perspective CheckOut</tags>
         </children>
         <children xsi:type="menu:MenuSeparator" xmi:id="_ezRBMJTAEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menuseparator.0"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_8joYYJeOEeKVpeJ3-AWeCA" elementId="ramo.klevis.openrental.handledmenuitem.0" label="Prvo" command="_098ZYJeOEeKVpeJ3-AWeCA"/>
       </children>
       <children xsi:type="menu:MenuSeparator" xmi:id="_G7heEJTCEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menuseparator.1"/>
       <children xsi:type="menu:Menu" xmi:id="_fv0JAJTAEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menu.2" label="Check In" iconURI="platform:/plugin/ramo.klevis.openrental/icons/Arrow-Right.png">
@@ -61,8 +62,10 @@
   <handlers xmi:id="_ZGxQUIzcEeKs6vbzRrpELA" elementId="handler.CheckIn" contributionURI="bundleclass://ramo.klevis.openrental.checkin/ramo.klevis.openrental.handlers.checkin.CheckInHandler" command="_fnCfYIzcEeKs6vbzRrpELA">
     <tags>Perspective CheckIn</tags>
   </handlers>
+  <handlers xmi:id="_3T7ZUJeOEeKVpeJ3-AWeCA" elementId="ramo.klevis.openrental.handler.0" contributionURI="bundleclass://ramo.klevis.openrental.checkin/ramo.klevis.openrental.handlers.checkin.P2UpdateHandler" command="_098ZYJeOEeKVpeJ3-AWeCA"/>
   <commands xmi:id="_dpw6YIzcEeKs6vbzRrpELA" elementId="command.CheckOut" commandName="Check Out" category="_l0jxkIzcEeKs6vbzRrpELA"/>
   <commands xmi:id="_fnCfYIzcEeKs6vbzRrpELA" elementId="command.CheckIn" commandName="Check In" category="_l0jxkIzcEeKs6vbzRrpELA"/>
+  <commands xmi:id="_098ZYJeOEeKVpeJ3-AWeCA" elementId="Prov" commandName="Prov"/>
   <addons xmi:id="_Fn6q8ozcEeKs6vbzRrpELA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_Fn6q84zcEeKs6vbzRrpELA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_Fn6q9IzcEeKs6vbzRrpELA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

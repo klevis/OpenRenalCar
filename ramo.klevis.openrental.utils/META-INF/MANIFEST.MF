@@ -9,7 +9,9 @@ Export-Package: notifier,
  ramo.klevis.openrental.utils
 Require-Bundle: org.eclipse.e4.ui.model.workbench;bundle-version="0.10.1",
  javax.persistence;bundle-version="2.0.3",
- com.google.gdt.eclipse.login
+ com.google.gdt.eclipse.login,
+ org.eclipse.e4.core.di;bundle-version="1.2.0",
+ org.eclipse.e4.core.contexts;bundle-version="1.2.0"
 Import-Package: org.eclipse.core.databinding.validation,
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.e4.ui.workbench.modeling,

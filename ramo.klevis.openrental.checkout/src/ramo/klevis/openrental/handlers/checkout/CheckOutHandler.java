@@ -16,8 +16,10 @@ import javax.inject.Inject;
 
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.services.events.IEventBroker;
+import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.basic.MTrimmedWindow;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 
 import ramo.klevis.openrental.utils.PerspectiveSwitcher;
@@ -30,15 +32,16 @@ public class CheckOutHandler {
 	@Execute
 	public void execute(
 
-	MTrimmedWindow mTrimmedWindow, MHandledMenuItem mHandledMenuItem,IEventBroker eventBroker)
+	MTrimmedWindow mTrimmedWindow, MHandledMenuItem mHandledMenuItem,
+			IEventBroker eventBroker, EModelService modelService)
 			throws InvocationTargetException, InterruptedException {
 
 		eventBroker.send("ClearAllCheckOut", "OK");
+
 		PerspectiveSwitcher.switchPerspective(mTrimmedWindow,
 				mHandledMenuItem.getTags(), partService);
 
-		// EntityManager entityManager = EntityManagerQuery.getEntityManager();
-
+		PerspectiveSwitcher.showWindowWithId(modelService, mTrimmedWindow, "Car Selection");
 	}
 
 }

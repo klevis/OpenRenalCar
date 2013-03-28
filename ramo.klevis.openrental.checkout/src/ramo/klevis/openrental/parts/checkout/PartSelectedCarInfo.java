@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import ramo.klevis.openrental.entity.Car;
 import ramo.klevis.openrental.forms.FormSelectedCar;
+import ramo.klevis.openrental.utils.CarImageHolder;
 
 public class PartSelectedCarInfo {
 
@@ -46,6 +47,9 @@ public class PartSelectedCarInfo {
 		this.parent = parent;
 		formSelectedCar = new FormSelectedCar(parent, SWT.NONE);
 
+		
+		CarImageHolder carImageHolder = new CarImageHolder(parent, 0);
+		carImageHolder.setBounds(1, 1, 300, 300);
 	}
 
 	@PreDestroy
