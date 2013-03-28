@@ -187,6 +187,12 @@ public class FormSearchPerson extends Composite {
 	// m_bindingContext = initDataBindings();
 	//
 	// }
+	public void clear() {
+		listCustomer.clear();
+		personSearch = new PersonSearch();
+		initDataBindings();
+	}
+
 	private IEventBroker eventBroker;
 
 	public FormSearchPerson(Composite parent, int i) {
@@ -210,8 +216,8 @@ public class FormSearchPerson extends Composite {
 
 		Button btnKerko = new Button(this, SWT.NONE);
 		btnKerko.setBounds(0, 46, 90, 25);
-		btnKerko.setImage(ResourceManager.getPluginImage("ramo.klevis.openrental",
-				"/image/cearch.png"));
+		btnKerko.setImage(ResourceManager.getPluginImage(
+				"ramo.klevis.openrental", "/image/cearch.png"));
 		btnKerko.addSelectionListener(new SelectionAdapter() {
 
 			@Override
@@ -304,7 +310,7 @@ public class FormSearchPerson extends Composite {
 					eventBroker.send("CustomerSelected", customerSelected);
 					setSelected(true);
 				} else {
-					setSelected(false); 
+					setSelected(false);
 				}
 
 			}

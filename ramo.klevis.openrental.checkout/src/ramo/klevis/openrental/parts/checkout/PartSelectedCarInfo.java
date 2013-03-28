@@ -25,10 +25,11 @@ public class PartSelectedCarInfo {
 	@Inject
 	@Optional
 	public void clearAll(@EventTopic("ClearAllCheckOut") String s) {
-//		formSelectedCar = new FormSelectedCar(parent, SWT.NONE);
-		
+
+		if (formSelectedCar != null)
+			formSelectedCar.setSelectedCar(new Car());
 	}
-	
+
 	@Inject
 	@Optional
 	public void showCSelectedCar(@EventTopic(value = "CarSelected") Car car) {
@@ -42,7 +43,7 @@ public class PartSelectedCarInfo {
 	@PostConstruct
 	public void createControls(Composite parent) {
 
-		this.parent=parent;
+		this.parent = parent;
 		formSelectedCar = new FormSelectedCar(parent, SWT.NONE);
 
 	}

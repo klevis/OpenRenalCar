@@ -5,6 +5,8 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -22,35 +24,33 @@ public class SelectCarCheckOut {
 	public SelectCarCheckOut() {
 	}
 
-
 	@Inject
 	IFreeCarsConsumer freeCarsConsumer;
 	/**
 	 * Create contents of the view part.
 	 */
-	
+
 	@Inject
 	IEventBroker eventBroker;
-	
-	
+	private FormAvaibleCar formAvaibleCar;
+
+	@Inject
+	@Optional
+	public void clearAll(@EventTopic("ClearAllCheckOut") String s) {
+		formAvaibleCar.clear();
+	}
+
 	@PostConstruct
-	public void createControls(Composite parent
-			) {
+	public void createControls(Composite parent) {
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 
-		FormAvaibleCar formAvaibleCar = new FormAvaibleCar(parent, SWT.NONE);
+		formAvaibleCar = new FormAvaibleCar(parent, SWT.NONE);
 
-        formAvaibleCar.setEventBroker(eventBroker);
+		formAvaibleCar.setEventBroker(eventBroker);
 		formAvaibleCar.setFreeCarConsumer(freeCarsConsumer);
 		formAvaibleCar.fillFileds();
 
-	
-		
-
-		
-
 	}
-	
 
 	@PreDestroy
 	public void dispose() {

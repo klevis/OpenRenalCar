@@ -86,13 +86,12 @@ public class FormAvaibleCar extends Composite {
 	private DateTime toTime;
 	private Spinner spinnerNrDay;
 
-	
-
 	/**
 	 * @wbp.parser.constructor
 	 */
 
 	IEventBroker eventBroker;
+
 	private void definePayForDay(Car car) {
 
 		int rentdays = 0;
@@ -124,6 +123,7 @@ public class FormAvaibleCar extends Composite {
 		}
 
 	}
+
 	private String calculateDifference() {
 		int hours = toTime.getHours();
 		int minutes = toTime.getMinutes();
@@ -157,15 +157,15 @@ public class FormAvaibleCar extends Composite {
 		System.out.println("  .... " + diffDays);
 		return s;
 	}
-	
+
 	private SelectionAdapter freeCarAction = new SelectionAdapter() {
 		@Override
 		public void widgetSelected(SelectionEvent e) {
 
-//			table.setVisible(true);
-//			btnNewButton.setVisible(true);
-//			table_1.setVisible(false);
-//			btnZgjidhRezervimin.setVisible(false);
+			// table.setVisible(true);
+			// btnNewButton.setVisible(true);
+			// table_1.setVisible(false);
+			// btnZgjidhRezervimin.setVisible(false);
 			boolean after = beanAvaibleCar.getFromDate().after(
 					beanAvaibleCar.getToDate());
 
@@ -180,7 +180,8 @@ public class FormAvaibleCar extends Composite {
 			String s = calculateDifference();
 
 			getListCarsAvaible().clear();
-			setListCarsAvaible(freeCarsConsumer.getFreedao().searchForFreeCars(beanAvaibleCar));
+			setListCarsAvaible(freeCarsConsumer.getFreedao().searchForFreeCars(
+					beanAvaibleCar));
 
 			List<Car> listCarsAvaible2 = getListCarsAvaible();
 			for (Car car : listCarsAvaible2) {
@@ -190,8 +191,8 @@ public class FormAvaibleCar extends Composite {
 			WritableList writableList_2 = new WritableList(
 					getListCarsAvaible(), Car.class);
 
-			spinnerNrDay.setSelection(Integer.parseInt(s));
 			tableViewer.setInput(writableList_2);
+			spinnerNrDay.setSelection(Integer.parseInt(s));
 
 			if (getListCarsAvaible() != null) {
 				if (getListCarsAvaible().isEmpty()) {
@@ -210,8 +211,7 @@ public class FormAvaibleCar extends Composite {
 		}
 
 	};
-	
-	
+
 	private SelectionAdapter chooseAction = new SelectionAdapter() {
 
 		// IAtomicChooserCar atomicChooserCar = new AtomicChooserCar();
@@ -253,9 +253,9 @@ public class FormAvaibleCar extends Composite {
 				elementAt.setNrditeve(spinnerNrDay.getSelection());
 				// setFormCheckOut(new FormCheckOut(shell, 0, (Car) elementAt));
 
-//				getFormCheckOut().setBounds(10, 80, 700, 610);
+				// getFormCheckOut().setBounds(10, 80, 700, 610);
 
-//				shell.layout();
+				// shell.layout();
 
 				// FormAvaibleCar.this.close();
 				boolean send = eventBroker.send("CarSelected", elementAt);
@@ -285,6 +285,16 @@ public class FormAvaibleCar extends Composite {
 
 		fillClassAndLocation();
 
+	}
+
+	public void clear() {
+
+		spinnerNrDay.setSelection(0);
+		getListCarsAvaible().clear();
+		WritableList writableList_2 = new WritableList(getListCarsAvaible(),
+				Car.class);
+
+		tableViewer.setInput(writableList_2);
 	}
 
 	public FormAvaibleCar(final Composite parent, int style) {
@@ -333,63 +343,63 @@ public class FormAvaibleCar extends Composite {
 		buttonFreeCar.setFont(SWTResourceManager.getFont("Segoe UI", 10,
 				SWT.BOLD | SWT.ITALIC));
 		buttonFreeCar.setBounds(278, 64, 208, 48);
-//		buttonFreeCar.addSelectionListener(new SelectionAdapter() {
-//			@Override
-//			public void widgetSelected(SelectionEvent e) {
-//
-//				int hours = toTime.getHours();
-//				int minutes = toTime.getMinutes();
-//				int seconds = toTime.getSeconds();
-//				beanAvaibleCar.getToDate().setHours(hours);
-//				beanAvaibleCar.getToDate().setMinutes(minutes);
-//				beanAvaibleCar.getToDate().setSeconds(seconds);
-//
-//				int fromhours = fromTime.getHours();
-//				int fromminutes = fromTime.getMinutes();
-//				int fromseconds = fromTime.getSeconds();
-//
-//				beanAvaibleCar.getFromDate().setHours(fromhours);
-//				beanAvaibleCar.getFromDate().setMinutes(fromminutes);
-//				beanAvaibleCar.getFromDate().setSeconds(fromseconds);
-//
-//				System.out.println(beanAvaibleCar.getFromDate().getDay());
-//				// nr i idteve
-//				long milliseconds1 = beanAvaibleCar.getFromDate().getTime();
-//				long milliseconds2 = beanAvaibleCar.getToDate().getTime();
-//				long diff = milliseconds2 - milliseconds1;
-//				long diffSeconds = diff / 1000;
-//				long diffMinutes = diff / (60 * 1000);
-//				long diffHours = diff / (60 * 60 * 1000);
-//				long diffDays = diff / (24 * 60 * 60 * 1000);
-//
-//				String s = "" + diffDays;
-//
-//				getListCarsAvaible().clear();
-//				setListCarsAvaible(freeCarsConsumer.getFreedao()
-//						.searchForFreeCars(beanAvaibleCar));
-//
-//				WritableList writableList_2 = new WritableList(
-//						getListCarsAvaible(), Car.class);
-//
-//				spinnerNrDay.setSelection(Integer.parseInt(s));
-//				tableViewer.setInput(writableList_2);
-//
-//				if (getListCarsAvaible() != null) {
-//					if (getListCarsAvaible().isEmpty()) {
-//
-//						NotifierDialog.notify("Njoftim",
-//								"Nuk ka asnje makine te lire ne keto data",
-//								NotificationType.WARN);
-//					}
-//				} else {
-//
-//					NotifierDialog.notify("Njoftim",
-//							"Nuk ka asnje makine te lire ne keto data",
-//							NotificationType.WARN);
-//				}
-//
-//			}
-//		});
+		// buttonFreeCar.addSelectionListener(new SelectionAdapter() {
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		//
+		// int hours = toTime.getHours();
+		// int minutes = toTime.getMinutes();
+		// int seconds = toTime.getSeconds();
+		// beanAvaibleCar.getToDate().setHours(hours);
+		// beanAvaibleCar.getToDate().setMinutes(minutes);
+		// beanAvaibleCar.getToDate().setSeconds(seconds);
+		//
+		// int fromhours = fromTime.getHours();
+		// int fromminutes = fromTime.getMinutes();
+		// int fromseconds = fromTime.getSeconds();
+		//
+		// beanAvaibleCar.getFromDate().setHours(fromhours);
+		// beanAvaibleCar.getFromDate().setMinutes(fromminutes);
+		// beanAvaibleCar.getFromDate().setSeconds(fromseconds);
+		//
+		// System.out.println(beanAvaibleCar.getFromDate().getDay());
+		// // nr i idteve
+		// long milliseconds1 = beanAvaibleCar.getFromDate().getTime();
+		// long milliseconds2 = beanAvaibleCar.getToDate().getTime();
+		// long diff = milliseconds2 - milliseconds1;
+		// long diffSeconds = diff / 1000;
+		// long diffMinutes = diff / (60 * 1000);
+		// long diffHours = diff / (60 * 60 * 1000);
+		// long diffDays = diff / (24 * 60 * 60 * 1000);
+		//
+		// String s = "" + diffDays;
+		//
+		// getListCarsAvaible().clear();
+		// setListCarsAvaible(freeCarsConsumer.getFreedao()
+		// .searchForFreeCars(beanAvaibleCar));
+		//
+		// WritableList writableList_2 = new WritableList(
+		// getListCarsAvaible(), Car.class);
+		//
+		// spinnerNrDay.setSelection(Integer.parseInt(s));
+		// tableViewer.setInput(writableList_2);
+		//
+		// if (getListCarsAvaible() != null) {
+		// if (getListCarsAvaible().isEmpty()) {
+		//
+		// NotifierDialog.notify("Njoftim",
+		// "Nuk ka asnje makine te lire ne keto data",
+		// NotificationType.WARN);
+		// }
+		// } else {
+		//
+		// NotifierDialog.notify("Njoftim",
+		// "Nuk ka asnje makine te lire ne keto data",
+		// NotificationType.WARN);
+		// }
+		//
+		// }
+		// });
 		buttonFreeCar.addSelectionListener(freeCarAction);
 		buttonFreeCar.setText("Merr makinat e lira");
 
@@ -446,38 +456,38 @@ public class FormAvaibleCar extends Composite {
 		Button btnNewButton = new Button(this, SWT.NONE);
 		btnNewButton.setImage(ResourceManager.getPluginImage(
 				"ramo.klevis.openrental", "icons/Symbol_OK.png"));
-//		btnNewButton.addSelectionListener(new SelectionAdapter() {
-//
-//			@Override
-//			public void widgetSelected(SelectionEvent e) {
-//
-//				ISelection selection = tableViewer.getSelection();
-//
-//				Car elementAt = (Car) tableViewer.getElementAt(table
-//						.getSelectionIndex());
-//
-//				if (selection.isEmpty() == false) {
-//
-//					elementAt.setNrditeve(spinnerNrDay.getSelection());
-//					// setFormCheckOut(new FormCheckOut(shell, 0, (Car)
-//					// elementAt,null));
-//
-//					// getFormCheckOut().setBounds(10, 80, 700, 610);
-//
-//					// shell.layout();
-//
-//					boolean send = eventBroker.send("CarSelected", elementAt);
-//					System.err.println("Send or not " + send);
-//
-//					// FormAvaibleCar.this.close();
-//
-//				} else {
-//					NotifierDialog.notify("Njoftim",
-//							"Nuk keni zgjedhur asnje makine",
-//							NotificationType.WARN);
-//				}
-//			}
-//		});
+		// btnNewButton.addSelectionListener(new SelectionAdapter() {
+		//
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		//
+		// ISelection selection = tableViewer.getSelection();
+		//
+		// Car elementAt = (Car) tableViewer.getElementAt(table
+		// .getSelectionIndex());
+		//
+		// if (selection.isEmpty() == false) {
+		//
+		// elementAt.setNrditeve(spinnerNrDay.getSelection());
+		// // setFormCheckOut(new FormCheckOut(shell, 0, (Car)
+		// // elementAt,null));
+		//
+		// // getFormCheckOut().setBounds(10, 80, 700, 610);
+		//
+		// // shell.layout();
+		//
+		// boolean send = eventBroker.send("CarSelected", elementAt);
+		// System.err.println("Send or not " + send);
+		//
+		// // FormAvaibleCar.this.close();
+		//
+		// } else {
+		// NotifierDialog.notify("Njoftim",
+		// "Nuk keni zgjedhur asnje makine",
+		// NotificationType.WARN);
+		// }
+		// }
+		// });
 		btnNewButton.addSelectionListener(chooseAction);
 		btnNewButton.setFont(SWTResourceManager.getFont("Segoe UI", 11,
 				SWT.BOLD | SWT.ITALIC));
@@ -574,8 +584,6 @@ public class FormAvaibleCar extends Composite {
 	public Car getSelectedCar() {
 		return selectedCar;
 	}
-
-	
 
 	protected DataBindingContext initDataBindings() {
 		DataBindingContext bindingContext = new DataBindingContext();

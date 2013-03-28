@@ -67,30 +67,26 @@ public class PartCheckOut {
 			ICheckOutConsumer checkOutConsumer, MPerspective mPerspective) {
 		parent.setLayout(null);
 
+		
 		this.mPerspective = mPerspective;
 		this.checkOutConsumer = checkOutConsumer;
 		this.parent = parent;
-		// loadCheckOutInfo(parent);
+		
+//		ScrolledComposite scrolledComposite = new ScrolledComposite(parent, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
+//		scrolledComposite.setExpandHorizontal(true);
+//		scrolledComposite.setExpandVertical(true);
+//		scrolledComposite.setAlwaysShowScrollBars(true);
+//		 loadCheckOutInfo(parent);
 
 	}
 
 	@Inject
 	@Optional
 	public void clearAll(@EventTopic("ClearAllCheckOut") String s) {
-		// if (formAdditionalDirver != null) {
-		// formAdditionalDirver.dispose();
-		// formAdditionalDirver = null;
-		// }
-		// if (formMainDriver != null) {
-		// formMainDriver.dispose();
-		// formMainDriver = null;
-		// }
-		// if (formCheckOut != null) {
-		// formCheckOut.dispose();
-		// formCheckOut = null;
-		// }
 		disposeWindowWithId(mPerspective, "Customer Selection");
+		loadCheckOutInfo(parent);
 
+		showWindowWithId(mPerspective, "Car Selection");
 	}
 
 	@Inject
