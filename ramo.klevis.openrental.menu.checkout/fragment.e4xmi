@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_A6NA8Jx6EeKhFMhZR4igFQ">
+  <imports xsi:type="commands:Command" xmi:id="_GQP4kJx6EeKhFMhZR4igFQ" elementId="command.CheckOut"/>
+  <imports xsi:type="commands:Command" xmi:id="_K7A-kJx6EeKhFMhZR4igFQ" elementId="Prov"/>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_A6NA8Zx6EeKhFMhZR4igFQ" featurename="children" parentElementId="ramo.klevis.openrental.menu.0">
+    <elements xsi:type="menu:Menu" xmi:id="_A6NA8px6EeKhFMhZR4igFQ" elementId="ramo.klevis.openrental.menu.1" label="Check Out" iconURI="platform:/plugin/ramo.klevis.openrental/icons/arrow.png">
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_A6NA85x6EeKhFMhZR4igFQ" elementId="menu.CheckOut" label="Check Out" iconURI="" command="_GQP4kJx6EeKhFMhZR4igFQ">
+        <tags>Perspective CheckOut</tags>
+      </children>
+      <children xsi:type="menu:MenuSeparator" xmi:id="_A6NA9Jx6EeKhFMhZR4igFQ" elementId="ramo.klevis.openrental.menuseparator.0"/>
+      <children xsi:type="menu:HandledMenuItem" xmi:id="_A6NA9Zx6EeKhFMhZR4igFQ" elementId="ramo.klevis.openrental.handledmenuitem.0" label="Prvo" command="_K7A-kJx6EeKhFMhZR4igFQ"/>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>

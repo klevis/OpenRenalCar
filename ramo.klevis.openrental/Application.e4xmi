@@ -28,13 +28,6 @@
       <children xsi:type="advanced:Perspective" xmi:id="_3HwXEJb1EeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.perspective.0"/>
     </children>
     <mainMenu xmi:id="_IMEcwJS-EeKzktioAy7wrg" elementId="ramo.klevis.openrental.menu.0">
-      <children xsi:type="menu:Menu" xmi:id="_cVaesJTAEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menu.1" label="Check Out" iconURI="platform:/plugin/ramo.klevis.openrental/icons/arrow.png">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_dyQQIJTAEeKzktioAy7wrg" elementId="menu.CheckOut" label="Check Out" iconURI="" command="_dpw6YIzcEeKs6vbzRrpELA">
-          <tags>Perspective CheckOut</tags>
-        </children>
-        <children xsi:type="menu:MenuSeparator" xmi:id="_ezRBMJTAEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menuseparator.0"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_8joYYJeOEeKVpeJ3-AWeCA" elementId="ramo.klevis.openrental.handledmenuitem.0" label="Prvo" command="_098ZYJeOEeKVpeJ3-AWeCA"/>
-      </children>
       <children xsi:type="menu:MenuSeparator" xmi:id="_G7heEJTCEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menuseparator.1"/>
       <children xsi:type="menu:Menu" xmi:id="_fv0JAJTAEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menu.2" label="Check In" iconURI="platform:/plugin/ramo.klevis.openrental/icons/Arrow-Right.png">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_geFkQJTAEeKzktioAy7wrg" elementId="menu.CheckIn" label="Check In" iconURI="" command="_fnCfYIzcEeKs6vbzRrpELA">

@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Checkout
+Bundle-SymbolicName: ramo.klevis.openrental.menu.checkout;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.e4.ui.workbench;bundle-version="0.11.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
