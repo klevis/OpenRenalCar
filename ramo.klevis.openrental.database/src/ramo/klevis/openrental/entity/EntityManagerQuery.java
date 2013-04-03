@@ -1,20 +1,11 @@
 package ramo.klevis.openrental.entity;
 
-import static org.eclipse.persistence.config.PersistenceUnitProperties.LOGGING_LEVEL;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.LOGGING_SESSION;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.LOGGING_THREAD;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.LOGGING_TIMESTAMP;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.TARGET_SERVER;
-import static org.eclipse.persistence.config.PersistenceUnitProperties.TRANSACTION_TYPE;
-
 import java.util.HashMap;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.spi.PersistenceUnitTransactionType;
 
 import org.eclipse.persistence.config.PersistenceUnitProperties;
-import org.eclipse.persistence.config.TargetServer;
 import org.eclipse.persistence.jpa.osgi.PersistenceProvider;
 
 public class EntityManagerQuery {
