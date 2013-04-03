@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="ramo.klevis.openrental" id="ramo.klevis.openrental.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
+<product name="ramo.klevis.openrental" uid="openrental" id="ramo.klevis.openrental.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="false" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -21,7 +21,6 @@
    </launcher>
 
    <vm>
-      <linux include="false">org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6</linux>
    </vm>
 
    <plugins>
@@ -173,11 +172,18 @@
    </plugins>
 
    <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.equinox.util" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.osgi" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.osgi.services" autoStart="true" startLevel="1" />
+      <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="4" />
       <plugin id="ramo.klevis.openrental.dao" autoStart="true" startLevel="0" />
-      <plugin id="ramo.klevis.openrental.database" autoStart="true" startLevel="0" />
       <plugin id="ramo.klevis.openrental.idao" autoStart="true" startLevel="0" />
       <plugin id="ramo.klevis.openrental.service" autoStart="true" startLevel="0" />
-      <plugin id="ramo.klevis.openrental.utils" autoStart="true" startLevel="0" />
    </configurations>
 
 </product>
