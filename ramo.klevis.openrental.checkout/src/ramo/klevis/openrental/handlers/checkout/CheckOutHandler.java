@@ -41,7 +41,10 @@ public class CheckOutHandler {
 		PerspectiveSwitcher.switchPerspective(mTrimmedWindow,
 				mHandledMenuItem.getTags(), partService);
 
+		
 		PerspectiveSwitcher.showWindowWithId(modelService, mTrimmedWindow, "Car Selection");
+	
+	PerspectiveSwitcher.disposeWindowWithId(modelService, mTrimmedWindow, "Customer Selection");
 	}
 
 }

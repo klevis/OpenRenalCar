@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_Fn6q8IzcEeKs6vbzRrpELA" elementId="org.eclipse.e4.ide.application">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_Fn6q8YzcEeKs6vbzRrpELA" label="ramo.klevis.openrental" width="1024" height="850">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_Fn6q8YzcEeKs6vbzRrpELA" label="ramo.klevis.openrental" width="1200" height="880">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_taJp8IzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.perspectivestack.0" selectedElement="_3HwXEJb1EeKMAZl0-6t-pA">
       <children xsi:type="advanced:Perspective" xmi:id="_uUnuIIzcEeKs6vbzRrpELA" elementId="Perspective CheckOut" selectedElement="_6U5CEIzcEeKs6vbzRrpELA">
         <children xsi:type="basic:PartSashContainer" xmi:id="_6U5CEIzcEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.partsashcontainer.0" containerData="" selectedElement="_tKtusJa_EeKMAZl0-6t-pA" horizontal="true">
@@ -25,7 +25,7 @@
           </children>
         </children>
       </children>
-      <children xsi:type="advanced:Perspective" xmi:id="_3HwXEJb1EeKMAZl0-6t-pA" elementId="ramo.klevis.openrental.perspective.0"/>
+      <children xsi:type="advanced:Perspective" xmi:id="_3HwXEJb1EeKMAZl0-6t-pA" elementId="Default"/>
     </children>
     <mainMenu xmi:id="_IMEcwJS-EeKzktioAy7wrg" elementId="ramo.klevis.openrental.menu.0">
       <children xsi:type="menu:MenuSeparator" xmi:id="_G7heEJTCEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menuseparator.1"/>
@@ -35,7 +35,11 @@
         </children>
         <children xsi:type="menu:MenuSeparator" xmi:id="_hBWCUJTAEeKzktioAy7wrg" elementId="ramo.klevis.openrental.menuseparator.0"/>
       </children>
+      <children xsi:type="menu:Menu" xmi:id="_qKNgUJyMEeKm0fu_BNt3CA" elementId="Menaxhim" label="Menaxhimi">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_FLp0wJyKEeKm0fu_BNt3CA" elementId="ramo.klevis.openrental.handledmenuitem.0" label="Instalo module" command="_D7SjoJyLEeKm0fu_BNt3CA"/>
+      </children>
     </mainMenu>
+    <windows xmi:id="_2wDz0J0LEeKAWf3S3Powgg" elementId="saddiol window" label="saddiol window" width="400" height="400"/>
     <trimBars xmi:id="_As00gIzdEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.trimbar.0">
       <children xsi:type="menu:ToolBar" xmi:id="_BI8IwIzdEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.toolbar.0" toBeRendered="false" visible="false">
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_Brwh8IzdEeKs6vbzRrpELA" elementId="ramo.klevis.openrental.toolbarseparator.0"/>
@@ -56,9 +60,11 @@
     <tags>Perspective CheckIn</tags>
   </handlers>
   <handlers xmi:id="_3T7ZUJeOEeKVpeJ3-AWeCA" elementId="ramo.klevis.openrental.handler.0" contributionURI="bundleclass://ramo.klevis.openrental.checkin/ramo.klevis.openrental.handlers.checkin.P2UpdateHandler" command="_098ZYJeOEeKVpeJ3-AWeCA"/>
+  <handlers xmi:id="_IezyIJyLEeKm0fu_BNt3CA" elementId="ramo.klevis.openrental.handler.1" contributionURI="bundleclass://ramo.klevis.openrental.p2/ramo.kelvis.openrental.p2.handler.InstallNewModule" command="_D7SjoJyLEeKm0fu_BNt3CA"/>
   <commands xmi:id="_dpw6YIzcEeKs6vbzRrpELA" elementId="command.CheckOut" commandName="Check Out" category="_l0jxkIzcEeKs6vbzRrpELA"/>
   <commands xmi:id="_fnCfYIzcEeKs6vbzRrpELA" elementId="command.CheckIn" commandName="Check In" category="_l0jxkIzcEeKs6vbzRrpELA"/>
   <commands xmi:id="_098ZYJeOEeKVpeJ3-AWeCA" elementId="Prov" commandName="Prov"/>
+  <commands xmi:id="_D7SjoJyLEeKm0fu_BNt3CA" elementId="command.intall" commandName="Install new software"/>
   <addons xmi:id="_Fn6q8ozcEeKs6vbzRrpELA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_Fn6q84zcEeKs6vbzRrpELA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_Fn6q9IzcEeKs6vbzRrpELA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

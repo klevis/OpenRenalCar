@@ -27,6 +27,9 @@ public class PartCheckIn {
 	private Label label;
 	private TableViewer tableViewer;
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Inject
 	public  PartCheckIn(Composite parent) {
 		parent.setLayout(new GridLayout());
